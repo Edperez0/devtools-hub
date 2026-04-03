@@ -1,7 +1,7 @@
 # 💰 Monetization Guide - DevTools Hub
 
 ## 🎯 Your Site is Live!
-**URL:** https://edperez0.github.io/devtools-hub/
+**URL:** https://devtoolshub.com/
 
 ---
 
@@ -164,7 +164,7 @@ Everything is client-side, so your data never leaves your browser. No signup, no
 
 Would love your feedback!
 
-Link: https://edperez0.github.io/devtools-hub/
+Link: https://devtoolshub.com/
 ```
 
 **r/javascript** (2M members)
@@ -175,7 +175,7 @@ Created 16 developer utilities using pure HTML/CSS/JavaScript. No frameworks, no
 
 All tools process data client-side for privacy. Open source on GitHub.
 
-Live site: https://edperez0.github.io/devtools-hub/
+Live site: https://devtoolshub.com/
 Repo: https://github.com/Edperez0/devtools-hub
 
 Feedback welcome!
@@ -194,7 +194,7 @@ Monetization plan:
 
 Currently at 0 visitors, hoping to hit 100K/month in 6 months.
 
-Check it out: https://edperez0.github.io/devtools-hub/
+Check it out: https://devtoolshub.com/
 
 Roast my landing page!
 ```
@@ -209,7 +209,7 @@ Roast my landing page!
 
 **Title:** Show HN: DevTools Hub – 16 free developer utilities
 
-**URL:** https://edperez0.github.io/devtools-hub/
+**URL:** https://devtoolshub.com/
 
 **Expected:** 1,000-5,000 visitors if it hits front page (30% chance)
 
@@ -339,5 +339,5 @@ Once you're approved for affiliates, I'll add them like this:
 
 ---
 
-**Your live site:** https://edperez0.github.io/devtools-hub/
+**Your live site:** https://devtoolshub.com/
 **GitHub repo:** https://github.com/Edperez0/devtools-hub

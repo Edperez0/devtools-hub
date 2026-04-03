@@ -4,7 +4,7 @@ Free collection of 16 essential developer tools. All tools run 100% client-side 
 
 ## 🚀 Live Demo
 
-[View Live Site](https://yourusername.github.io/devtools-hub)
+[View Live Site](https://devtoolshub.com)
 
 ## 🛠️ Tools Included
 
@@ -41,7 +41,7 @@ This is a static site that can be deployed to GitHub Pages:
 1. Push to GitHub
 2. Enable GitHub Pages in repository settings
 3. Select main branch as source
-4. Your site will be live at `https://yourusername.github.io/devtools-hub`
+4. Your site will be live at `https://devtoolshub.com`
 
 ## 💰 Monetization Strategy
 
