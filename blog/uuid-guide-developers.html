@@ -8,7 +8,6 @@
     <title>Understanding UUIDs: A Developer's Complete Guide | DevTools Hub</title>
     <meta name="description" content="Everything about UUIDs - what they are, when to use them, different versions, and implementation best practices.">
     <meta name="keywords" content="UUID, GUID, unique identifier, UUID generator, UUID v4">
-    <meta name="author" content="Eduardo Perez">
     <link rel="canonical" href="https://devtoolsub.com/blog/uuid-guide-developers.html">
     <meta property="article:published_time" content="2024-12-20">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⚡</text></svg>">
@@ -18,68 +17,5 @@
     <div class="article-container">
         <a href="../blog.html" class="back-link">← Back to Blog</a>
         <h1>Understanding UUIDs: A Developer's Complete Guide</h1>
-        <div class="article-meta"><strong>By Eduardo Perez</strong> • December 20, 2024 • 7 min read</div>
-
-        <p>UUIDs (Universally Unique Identifiers) are 128-bit numbers used to uniquely identify information. They're essential in distributed systems, databases, and APIs.</p>
-
-        <h2>What is a UUID?</h2>
-        <p>A UUID looks like this: <code>550e8400-e29b-41d4-a716-446655440000</code></p>
-        <p>It's a 36-character string with 32 hexadecimal digits separated by hyphens into five groups (8-4-4-4-12).</p>
-
-        <h2>Why Use UUIDs?</h2>
-        <ul>
-            <li><strong>No central coordination needed</strong> - Generate anywhere without collisions</li>
-            <li><strong>Scalability</strong> - Perfect for distributed systems</li>
-            <li><strong>Security</strong> - Non-sequential, harder to guess</li>
-            <li><strong>Portability</strong> - Work across databases and systems</li>
-        </ul>
-
-        <h2>UUID Versions</h2>
-        <h3>Version 1 (Timestamp)</h3>
-        <p>Based on MAC address and timestamp. Reveals creation time and location. Less commonly used due to privacy concerns.</p>
-
-        <h3>Version 4 (Random)</h3>
-        <p>Most popular. Generated using random numbers. 122 bits of randomness means collision probability is virtually zero.</p>
-        <pre><code>const uuid = crypto.randomUUID(); // JavaScript
-// Output: 9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d</code></pre>
-
-        <a href="../uuid-generator.html" class="tool-cta">🆔 Generate UUIDs Now →</a>
-
-        <h2>When to Use UUIDs</h2>
-        <ul>
-            <li>Distributed databases (multiple servers generating IDs)</li>
-            <li>Public-facing IDs (APIs, URLs)</li>
-            <li>Offline data generation</li>
-            <li>Microservices architecture</li>
-        </ul>
-
-        <h2>When NOT to Use UUIDs</h2>
-        <ul>
-            <li>Primary keys in high-traffic databases (larger index size)</li>
-            <li>User-facing IDs (too long, not human-readable)</li>
-            <li>When sequential ordering matters</li>
-        </ul>
-
-        <h2>Performance Considerations</h2>
-        <p>UUIDs are 128 bits vs 32/64 bits for integers. This impacts:</p>
-        <ul>
-            <li>Index size (larger B-trees)</li>
-            <li>Memory usage</li>
-            <li>Join performance</li>
-        </ul>
-        <p>For most applications, this overhead is negligible compared to the benefits.</p>
-
-        <h2>Best Practices</h2>
-        <ol>
-            <li>Use UUID v4 for most cases</li>
-            <li>Store as binary in databases for efficiency</li>
-            <li>Add database indexes on UUID columns</li>
-            <li>Use libraries, don't implement your own</li>
-        </ol>
-
-        <p>Need UUIDs? Our <a href="../uuid-generator.html" style="color: #667eea; font-weight: 600;">UUID Generator</a> creates them instantly with one click.</p>
-
-        <a href="../blog.html" class="back-link" style="margin-top: 50px; display: inline-block;">← Back to Blog</a>
-    </div>
 </body>
 </html>

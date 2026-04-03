@@ -8,7 +8,6 @@
     <title>JWT Authentication: A Complete Guide for Web Developers | DevTools Hub</title>
     <meta name="description" content="Deep dive into JSON Web Tokens - how they work, security considerations, and implementation patterns.">
     <meta name="keywords" content="JWT, JSON web token, JWT authentication, JWT decoder, token authentication">
-    <meta name="author" content="Eduardo Perez">
     <link rel="canonical" href="https://devtoolsub.com/blog/jwt-authentication-explained.html">
     <meta property="article:published_time" content="2024-10-15">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⚡</text></svg>">
@@ -18,62 +17,5 @@
     <div class="article-container">
         <a href="../blog.html" class="back-link">← Back to Blog</a>
         <h1>JWT Authentication: A Complete Guide for Web Developers</h1>
-        <div class="article-meta"><strong>By Eduardo Perez</strong> • October 15, 2024 • 9 min read</div>
-
-        <p>JWT (JSON Web Token) is the standard for secure authentication in modern web applications. Understanding how they work is essential for building secure APIs.</p>
-
-        <h2>What is a JWT?</h2>
-        <p>A JWT is a compact, URL-safe token containing three parts separated by dots:</p>
-        <p><code>header.payload.signature</code></p>
-
-        <h3>Header</h3>
-        <p>Contains token type (JWT) and signing algorithm (HS256, RS256, etc.)</p>
-
-        <h3>Payload</h3>
-        <p>Contains claims (user data, permissions, expiration time). Not encrypted - don't store sensitive data.</p>
-
-        <h3>Signature</h3>
-        <p>Verifies the token hasn't been tampered with. Created using header, payload, and secret key.</p>
-
-        <a href="../jwt-decoder.html" class="tool-cta">🎫 Decode JWT Tokens →</a>
-
-        <h2>How JWT Authentication Works</h2>
-        <ol>
-            <li>User logs in with credentials</li>
-            <li>Server validates and generates JWT</li>
-            <li>Client stores JWT (localStorage, cookie)</li>
-            <li>Client sends JWT with each request (Authorization header)</li>
-            <li>Server verifies signature and grants access</li>
-        </ol>
-
-        <h2>Security Best Practices</h2>
-        <ul>
-            <li>Use HTTPS always</li>
-            <li>Set short expiration times (15 minutes access, 7 days refresh)</li>
-            <li>Store tokens securely (httpOnly cookies preferred)</li>
-            <li>Implement token refresh mechanism</li>
-            <li>Validate signature on every request</li>
-            <li>Use strong secret keys (256+ bits)</li>
-        </ul>
-
-        <h2>Common Mistakes</h2>
-        <ul>
-            <li>Storing sensitive data in payload (it's Base64, not encrypted)</li>
-            <li>No expiration time (tokens valid forever)</li>
-            <li>Weak secret keys</li>
-            <li>Not validating tokens server-side</li>
-            <li>Storing in localStorage (XSS vulnerable)</li>
-        </ul>
-
-        <h2>JWT vs Session Auth</h2>
-        <p><strong>JWT pros:</strong> Stateless, scalable, works across domains</p>
-        <p><strong>JWT cons:</strong> Can't revoke easily, larger than session IDs</p>
-        <p><strong>Sessions pros:</strong> Easy to revoke, smaller</p>
-        <p><strong>Sessions cons:</strong> Requires server-side storage, harder to scale</p>
-
-        <p>Debug JWTs easily with our <a href="../jwt-decoder.html" style="color: #667eea; font-weight: 600;">JWT Decoder</a> - inspect header and payload instantly.</p>
-
-        <a href="../blog.html" class="back-link" style="margin-top: 50px; display: inline-block;">← Back to Blog</a>
-    </div>
 </body>
 </html>
