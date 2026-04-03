@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lorem Ipsum Generator - Free Placeholder Text | DevTools Hub</title>
+    <meta name="description" content="Generate Lorem Ipsum placeholder text for mockups and designs. Free online Lorem Ipsum generator.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .back-link { color: #667eea; text-decoration: none; font-weight: 500; margin-bottom: 20px; display: inline-block; }
+        h1 { color: #667eea; font-size: 2.5em; margin-bottom: 10px; }
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 25px 0;
+        }
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        label {
+            font-weight: 600;
+            color: #333;
+        }
+        input[type="number"] {
+            width: 80px;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        input:focus { outline: none; border-color: #667eea; }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            grid-column: 1 / -1;
+        }
+        button:hover { background: #5568d3; }
+        textarea {
+            width: 100%;
+            min-height: 400px;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: Georgia, serif;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        textarea:focus { outline: none; border-color: #667eea; }
+        .secondary {
+            background: #e0e0e0;
+            color: #333;
+            margin-top: 10px;
+        }
+        .secondary:hover { background: #d0d0d0; }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            h1 { font-size: 1.8em; }
+            .controls { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to All Tools</a>
+        <h1>📝 Lorem Ipsum Generator</h1>
+        <p>Generate placeholder text for your designs and mockups</p>
+
+        <div class="controls">
+            <div class="control-group">
+                <label>Paragraphs:</label>
+                <input type="number" id="paragraphs" value="3" min="1" max="50">
+            </div>
+            <div class="control-group">
+                <label>Words per paragraph:</label>
+                <input type="number" id="wordsPerPara" value="50" min="10" max="200">
+            </div>
+            <button onclick="generateLoremIpsum()">Generate Lorem Ipsum</button>
+        </div>
+
+        <textarea id="output" readonly></textarea>
+        <button onclick="copyToClipboard()" class="secondary">Copy to Clipboard</button>
+    </div>
+
+    <script>
+        const loremWords = [
+            'lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit',
+            'sed', 'do', 'eiusmod', 'tempor', 'incididunt', 'ut', 'labore', 'et', 'dolore',
+            'magna', 'aliqua', 'enim', 'ad', 'minim', 'veniam', 'quis', 'nostrud',
+            'exercitation', 'ullamco', 'laboris', 'nisi', 'aliquip', 'ex', 'ea', 'commodo',
+            'consequat', 'duis', 'aute', 'irure', 'in', 'reprehenderit', 'voluptate',
+            'velit', 'esse', 'cillum', 'fugiat', 'nulla', 'pariatur', 'excepteur', 'sint',
+            'occaecat', 'cupidatat', 'non', 'proident', 'sunt', 'culpa', 'qui', 'officia',
+            'deserunt', 'mollit', 'anim', 'id', 'est', 'laborum'
+        ];
+
+        function generateLoremIpsum() {
+            const numParagraphs = parseInt(document.getElementById('paragraphs').value);
+            const wordsPerPara = parseInt(document.getElementById('wordsPerPara').value);
+            const output = document.getElementById('output');
+
+            let result = [];
+
+            for (let i = 0; i < numParagraphs; i++) {
+                let paragraph = [];
+                for (let j = 0; j < wordsPerPara; j++) {
+                    const randomWord = loremWords[Math.floor(Math.random() * loremWords.length)];
+                    paragraph.push(randomWord);
+                }
+
+                // Capitalize first letter
+                paragraph[0] = paragraph[0].charAt(0).toUpperCase() + paragraph[0].slice(1);
+
+                // Add period at end
+                let paraText = paragraph.join(' ') + '.';
+
+                result.push(paraText);
+            }
+
+            output.value = result.join('\n\n');
+        }
+
+        function copyToClipboard() {
+            const output = document.getElementById('output');
+            output.select();
+            document.execCommand('copy');
+            alert('Copied to clipboard!');
+        }
+
+        // Generate on load
+        generateLoremIpsum();
+    </script>
+</body>
+</html>

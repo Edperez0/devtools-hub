@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Picker & Converter - HEX RGB HSL | DevTools Hub</title>
+    <meta name="description" content="Free color picker and converter. Convert between HEX, RGB, HSL formats with live preview.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .back-link { color: #667eea; text-decoration: none; font-weight: 500; margin-bottom: 20px; display: inline-block; }
+        h1 { color: #667eea; font-size: 2.5em; margin-bottom: 10px; }
+        .picker-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .color-display {
+            width: 100%;
+            height: 200px;
+            border-radius: 12px;
+            border: 3px solid #e0e0e0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        input[type="color"] {
+            width: 100%;
+            height: 60px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .format-group {
+            margin: 15px 0;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+        }
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            h1 { font-size: 1.8em; }
+            .picker-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to All Tools</a>
+        <h1>🎨 Color Picker & Converter</h1>
+        <p>Convert between HEX, RGB, and HSL color formats</p>
+
+        <div class="picker-container">
+            <div>
+                <h2 style="margin-bottom: 15px;">Color Picker</h2>
+                <input type="color" id="colorPicker" value="#667eea">
+                <div class="color-display" id="colorDisplay"></div>
+            </div>
+
+            <div>
+                <h2 style="margin-bottom: 15px;">Color Formats</h2>
+
+                <div class="format-group">
+                    <label>HEX</label>
+                    <input type="text" id="hexInput" placeholder="#667eea">
+                </div>
+
+                <div class="format-group">
+                    <label>RGB</label>
+                    <input type="text" id="rgbInput" placeholder="rgb(102, 126, 234)">
+                </div>
+
+                <div class="format-group">
+                    <label>HSL</label>
+                    <input type="text" id="hslInput" placeholder="hsl(229, 76%, 66%)">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const picker = document.getElementById('colorPicker');
+        const display = document.getElementById('colorDisplay');
+        const hexInput = document.getElementById('hexInput');
+        const rgbInput = document.getElementById('rgbInput');
+        const hslInput = document.getElementById('hslInput');
+
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : null;
+        }
+
+        function rgbToHsl(r, g, b) {
+            r /= 255; g /= 255; b /= 255;
+            const max = Math.max(r, g, b), min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+
+            if (max === min) {
+                h = s = 0;
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch (max) {
+                    case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+                    case g: h = ((b - r) / d + 2) / 6; break;
+                    case b: h = ((r - g) / d + 4) / 6; break;
+                }
+            }
+
+            return {
+                h: Math.round(h * 360),
+                s: Math.round(s * 100),
+                l: Math.round(l * 100)
+            };
+        }
+
+        function updateColor(hex) {
+            display.style.backgroundColor = hex;
+            hexInput.value = hex.toUpperCase();
+
+            const rgb = hexToRgb(hex);
+            if (rgb) {
+                rgbInput.value = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+                const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+                hslInput.value = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+            }
+        }
+
+        picker.addEventListener('input', (e) => {
+            updateColor(e.target.value);
+        });
+
+        hexInput.addEventListener('input', (e) => {
+            if (/^#[0-9A-F]{6}$/i.test(e.target.value)) {
+                picker.value = e.target.value;
+                updateColor(e.target.value);
+            }
+        });
+
+        // Initialize
+        updateColor(picker.value);
+    </script>
+</body>
+</html>

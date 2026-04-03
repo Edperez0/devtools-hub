@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Formatter & Validator - Free Online Tool | DevTools Hub</title>
+    <meta name="description" content="Free online JSON formatter and validator. Beautify, minify, and validate JSON with syntax highlighting. Works instantly in your browser.">
+    <link rel="canonical" href="https://yourdomain.github.io/json-formatter.html">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        header {
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .back-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background: #5568d3;
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+        .secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        .secondary:hover {
+            background: #d0d0d0;
+        }
+        textarea {
+            width: 100%;
+            min-height: 400px;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            resize: vertical;
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .error {
+            background: #fee;
+            border: 2px solid #fcc;
+            padding: 15px;
+            border-radius: 8px;
+            color: #c33;
+            margin-top: 15px;
+            display: none;
+        }
+        .success {
+            background: #efe;
+            border: 2px solid #cfc;
+            padding: 15px;
+            border-radius: 8px;
+            color: #3c3;
+            margin-top: 15px;
+            display: none;
+        }
+        .info {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        .info h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to All Tools</a>
+        <header>
+            <h1>{ } JSON Formatter & Validator</h1>
+            <p>Format, validate, and beautify JSON data instantly</p>
+        </header>
+
+        <div class="controls">
+            <button onclick="formatJSON()">Format JSON</button>
+            <button onclick="minifyJSON()">Minify JSON</button>
+            <button onclick="validateJSON()">Validate JSON</button>
+            <button onclick="clearText()" class="secondary">Clear</button>
+            <button onclick="copyToClipboard()" class="secondary">Copy to Clipboard</button>
+        </div>
+
+        <textarea id="jsonInput" placeholder="Paste your JSON here..."></textarea>
+
+        <div id="error" class="error"></div>
+        <div id="success" class="success"></div>
+
+        <div class="info">
+            <h2>How to Use</h2>
+            <ul style="margin-left: 20px; line-height: 2;">
+                <li><strong>Format:</strong> Beautify compressed JSON with proper indentation</li>
+                <li><strong>Minify:</strong> Remove whitespace to reduce file size</li>
+                <li><strong>Validate:</strong> Check if your JSON is properly formatted</li>
+                <li><strong>100% Client-Side:</strong> Your data never leaves your browser</li>
+            </ul>
+
+            <h2 style="margin-top: 20px;">What is JSON?</h2>
+            <p style="line-height: 1.8;">JSON (JavaScript Object Notation) is a lightweight data interchange format. It's easy for humans to read and write, and easy for machines to parse and generate. JSON is commonly used in APIs, configuration files, and data storage.</p>
+        </div>
+    </div>
+
+    <script>
+        const input = document.getElementById('jsonInput');
+        const errorDiv = document.getElementById('error');
+        const successDiv = document.getElementById('success');
+
+        function showError(message) {
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            successDiv.style.display = 'none';
+        }
+
+        function showSuccess(message) {
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            errorDiv.style.display = 'none';
+        }
+
+        function hideMessages() {
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+        }
+
+        function formatJSON() {
+            hideMessages();
+            try {
+                const json = JSON.parse(input.value);
+                input.value = JSON.stringify(json, null, 2);
+                showSuccess('✓ JSON formatted successfully!');
+            } catch (e) {
+                showError('✗ Invalid JSON: ' + e.message);
+            }
+        }
+
+        function minifyJSON() {
+            hideMessages();
+            try {
+                const json = JSON.parse(input.value);
+                input.value = JSON.stringify(json);
+                showSuccess('✓ JSON minified successfully!');
+            } catch (e) {
+                showError('✗ Invalid JSON: ' + e.message);
+            }
+        }
+
+        function validateJSON() {
+            hideMessages();
+            try {
+                JSON.parse(input.value);
+                showSuccess('✓ Valid JSON!');
+            } catch (e) {
+                showError('✗ Invalid JSON: ' + e.message);
+            }
+        }
+
+        function clearText() {
+            input.value = '';
+            hideMessages();
+        }
+
+        function copyToClipboard() {
+            input.select();
+            document.execCommand('copy');
+            showSuccess('✓ Copied to clipboard!');
+        }
+
+        // Example JSON for first-time visitors
+        if (!input.value) {
+            input.value = '{"name":"DevTools Hub","tools":["JSON Formatter","Base64 Encoder","URL Encoder"],"active":true,"count":16}';
+        }
+    </script>
+</body>
+</html>

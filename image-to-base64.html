@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to Base64 Converter - Free Online Tool | DevTools Hub</title>
+    <meta name="description" content="Convert images to Base64 data URIs for inline embedding in HTML/CSS. Free image to Base64 converter.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .back-link { color: #667eea; text-decoration: none; font-weight: 500; margin-bottom: 20px; display: inline-block; }
+        h1 { color: #667eea; font-size: 2.5em; margin-bottom: 10px; }
+        .upload-area {
+            border: 3px dashed #667eea;
+            border-radius: 12px;
+            padding: 60px 20px;
+            text-align: center;
+            margin: 25px 0;
+            background: #f8f8f8;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .upload-area:hover {
+            background: #f0f0f0;
+            border-color: #5568d3;
+        }
+        .upload-area.dragover {
+            background: #e8eaf6;
+            border-color: #5568d3;
+        }
+        .upload-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .preview-section {
+            margin: 25px 0;
+            display: none;
+        }
+        .image-preview {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.5;
+            resize: vertical;
+        }
+        textarea:focus { outline: none; border-color: #667eea; }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            margin: 10px 5px;
+        }
+        button:hover { background: #5568d3; }
+        .secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        .secondary:hover { background: #d0d0d0; }
+        .info-box {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 0.9em;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            h1 { font-size: 1.8em; }
+            .upload-area { padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to All Tools</a>
+        <h1>🖼️ Image to Base64</h1>
+        <p>Convert images to Base64 data URIs for inline embedding</p>
+
+        <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+            <div class="upload-icon">📁</div>
+            <h2>Click or Drop Image Here</h2>
+            <p>Supports: JPG, PNG, GIF, SVG, WebP</p>
+        </div>
+
+        <input type="file" id="fileInput" accept="image/*">
+
+        <div class="preview-section" id="previewSection">
+            <h2>Preview</h2>
+            <img id="preview" class="image-preview">
+
+            <div class="info-box" id="imageInfo"></div>
+
+            <h2>Base64 Output</h2>
+            <textarea id="base64Output" readonly placeholder="Base64 string will appear here..."></textarea>
+
+            <button onclick="copyBase64()">Copy Base64</button>
+            <button onclick="copyDataURL()" class="secondary">Copy Data URL</button>
+            <button onclick="reset()" class="secondary">Upload Another</button>
+        </div>
+    </div>
+
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const previewSection = document.getElementById('previewSection');
+        const preview = document.getElementById('preview');
+        const base64Output = document.getElementById('base64Output');
+        const imageInfo = document.getElementById('imageInfo');
+
+        // Drag and drop
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                handleFile(file);
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                handleFile(file);
+            }
+        });
+
+        function handleFile(file) {
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                const result = e.target.result;
+                preview.src = result;
+                base64Output.value = result;
+
+                // Show file info
+                const sizeKB = (file.size / 1024).toFixed(2);
+                imageInfo.innerHTML = `
+                    <strong>Filename:</strong> ${file.name}<br>
+                    <strong>Type:</strong> ${file.type}<br>
+                    <strong>Size:</strong> ${sizeKB} KB<br>
+                    <strong>Base64 Length:</strong> ${result.length} characters
+                `;
+
+                previewSection.style.display = 'block';
+                uploadArea.style.display = 'none';
+            };
+
+            reader.readAsDataURL(file);
+        }
+
+        function copyBase64() {
+            const base64 = base64Output.value.split(',')[1]; // Remove data URL prefix
+            navigator.clipboard.writeText(base64).then(() => {
+                alert('Base64 string copied to clipboard!');
+            });
+        }
+
+        function copyDataURL() {
+            base64Output.select();
+            document.execCommand('copy');
+            alert('Data URL copied to clipboard!');
+        }
+
+        function reset() {
+            fileInput.value = '';
+            base64Output.value = '';
+            preview.src = '';
+            previewSection.style.display = 'none';
+            uploadArea.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

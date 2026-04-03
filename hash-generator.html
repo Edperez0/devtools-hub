@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hash Generator MD5 SHA-256 - Free Online Tool | DevTools Hub</title>
+    <meta name="description" content="Generate MD5, SHA-1, SHA-256, SHA-512 hashes for text. Free cryptographic hash generator for developers.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .back-link { color: #667eea; text-decoration: none; font-weight: 500; margin-bottom: 20px; display: inline-block; }
+        h1 { color: #667eea; font-size: 2.5em; margin-bottom: 10px; }
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            margin: 15px 0;
+        }
+        textarea:focus { outline: none; border-color: #667eea; }
+        .hash-result {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f8f8;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+        }
+        .hash-result h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .hash-value {
+            font-family: 'Monaco', 'Courier New', monospace;
+            word-break: break-all;
+            padding: 10px;
+            background: white;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            margin: 5px;
+        }
+        button:hover { background: #5568d3; }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            h1 { font-size: 1.8em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to All Tools</a>
+        <h1>🔐 Hash Generator</h1>
+        <p>Generate cryptographic hashes for text</p>
+
+        <h2 style="margin-top: 25px;">Input Text</h2>
+        <textarea id="input" placeholder="Enter text to hash...">Hello World</textarea>
+
+        <button onclick="generateHashes()">Generate All Hashes</button>
+
+        <div id="results"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script>
+        function generateHashes() {
+            const input = document.getElementById('input').value;
+            const results = document.getElementById('results');
+
+            const md5 = CryptoJS.MD5(input).toString();
+            const sha1 = CryptoJS.SHA1(input).toString();
+            const sha256 = CryptoJS.SHA256(input).toString();
+            const sha512 = CryptoJS.SHA512(input).toString();
+
+            results.innerHTML = `
+                <div class="hash-result">
+                    <h3>MD5</h3>
+                    <div class="hash-value">${md5}</div>
+                    <button onclick="copyToClipboard('${md5}')">Copy</button>
+                </div>
+
+                <div class="hash-result">
+                    <h3>SHA-1</h3>
+                    <div class="hash-value">${sha1}</div>
+                    <button onclick="copyToClipboard('${sha1}')">Copy</button>
+                </div>
+
+                <div class="hash-result">
+                    <h3>SHA-256</h3>
+                    <div class="hash-value">${sha256}</div>
+                    <button onclick="copyToClipboard('${sha256}')">Copy</button>
+                </div>
+
+                <div class="hash-result">
+                    <h3>SHA-512</h3>
+                    <div class="hash-value">${sha512}</div>
+                    <button onclick="copyToClipboard('${sha512}')">Copy</button>
+                </div>
+            `;
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copied to clipboard!');
+            });
+        }
+
+        // Generate on load
+        generateHashes();
+    </script>
+</body>
+</html>

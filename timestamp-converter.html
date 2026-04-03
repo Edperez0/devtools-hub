@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unix Timestamp Converter - Free Online Tool | DevTools Hub</title>
+    <meta name="description" content="Convert between Unix timestamps and human-readable dates. Free timestamp converter for developers.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .back-link { color: #667eea; text-decoration: none; font-weight: 500; margin-bottom: 20px; display: inline-block; }
+        h1 { color: #667eea; font-size: 2.5em; margin-bottom: 10px; }
+        .current-time {
+            background: #f8f8f8;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            text-align: center;
+            border: 2px solid #e0e0e0;
+        }
+        .current-time h2 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        .timestamp {
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 2em;
+            color: #333;
+            margin: 10px 0;
+        }
+        .converter-section {
+            margin: 30px 0;
+            padding: 25px;
+            background: #f8f8f8;
+            border-radius: 12px;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        input:focus { outline: none; border-color: #667eea; }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+        }
+        button:hover { background: #5568d3; }
+        .result {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            color: #667eea;
+            font-size: 16px;
+        }
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            h1 { font-size: 1.8em; }
+            .timestamp { font-size: 1.5em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to All Tools</a>
+        <h1>⏰ Timestamp Converter</h1>
+        <p>Convert between Unix timestamps and human-readable dates</p>
+
+        <div class="current-time">
+            <h2>Current Unix Timestamp</h2>
+            <div class="timestamp" id="currentTimestamp"></div>
+            <div id="currentDate"></div>
+        </div>
+
+        <div class="converter-section">
+            <h2 style="margin-bottom: 15px;">Timestamp to Date</h2>
+            <label>Unix Timestamp (seconds)</label>
+            <input type="number" id="timestampInput" placeholder="1609459200">
+            <button onclick="convertTimestamp()">Convert</button>
+            <div id="timestampResult" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="converter-section">
+            <h2 style="margin-bottom: 15px;">Date to Timestamp</h2>
+            <label>Date (YYYY-MM-DD HH:MM:SS)</label>
+            <input type="text" id="dateInput" placeholder="2026-04-02 12:00:00">
+            <button onclick="convertDate()">Convert</button>
+            <div id="dateResult" class="result" style="display: none;"></div>
+        </div>
+    </div>
+
+    <script>
+        function updateCurrentTime() {
+            const now = Date.now();
+            const timestamp = Math.floor(now / 1000);
+            document.getElementById('currentTimestamp').textContent = timestamp;
+            document.getElementById('currentDate').textContent = new Date(now).toLocaleString();
+        }
+
+        function convertTimestamp() {
+            const timestamp = document.getElementById('timestampInput').value;
+            const date = new Date(timestamp * 1000);
+            const result = document.getElementById('timestampResult');
+            result.textContent = date.toLocaleString() + ' (Local Time)';
+            result.style.display = 'block';
+        }
+
+        function convertDate() {
+            const dateStr = document.getElementById('dateInput').value;
+            const date = new Date(dateStr);
+            const timestamp = Math.floor(date.getTime() / 1000);
+            const result = document.getElementById('dateResult');
+            result.textContent = timestamp;
+            result.style.display = 'block';
+        }
+
+        // Update current time every second
+        updateCurrentTime();
+        setInterval(updateCurrentTime, 1000);
+    </script>
+</body>
+</html>
