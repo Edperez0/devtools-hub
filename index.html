@@ -108,6 +108,23 @@
             backdrop-filter: blur(10px);
         }
 
+        .feature-link {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 25px;
+            border-radius: 30px;
+            color: white;
+            font-size: 0.9em;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .feature-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
         .tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -212,6 +229,7 @@
                 <div class="feature">⚡ Lightning Fast</div>
                 <div class="feature">📱 Mobile Friendly</div>
                 <div class="feature">🆓 Always Free</div>
+                <a href="blog.html" class="feature-link">📝 Developer Blog</a>
             </div>
         </header>
 
