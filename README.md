@@ -4,7 +4,7 @@ Free collection of 16 essential developer tools. All tools run 100% client-side 
 
 ## 🚀 Live Demo
 
-[View Live Site](https://devtoolshub.com)
+[View Live Site](https://devtoolsub.com)
 
 ## 🛠️ Tools Included
 
