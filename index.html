@@ -8,9 +8,19 @@
     <meta name="keywords" content="developer tools, json formatter, base64 encoder, online tools, web developer utilities">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="DevTools Hub - Free Developer Tools">
-    <meta property="og:description" content="Free collection of essential developer tools. Fast, secure, client-side processing.">
+    <meta property="og:title" content="DevTools Hub - 16 Free Developer Tools">
+    <meta property="og:description" content="JSON formatter, Base64 encoder, UUID generator, password generator & 12 more tools. 100% private, client-side only. No signup required.">
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://devtoolsub.com/">
+    <meta property="og:site_name" content="DevTools Hub">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DevTools Hub - 16 Free Developer Tools">
+    <meta name="twitter:description" content="JSON formatter, Base64 encoder, UUID generator & more. 100% private, client-side processing.">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⚡</text></svg>">
 
     <!-- Schema.org -->
     <script type="application/ld+json">
@@ -148,12 +158,28 @@
         }
 
         @media (max-width: 768px) {
+            header {
+                padding: 30px 20px 20px;
+            }
+
             h1 {
                 font-size: 2em;
+                margin-bottom: 8px;
             }
 
             .tagline {
-                font-size: 1.1em;
+                font-size: 1em;
+                margin-bottom: 20px;
+            }
+
+            .features {
+                gap: 10px;
+                margin-bottom: 25px;
+            }
+
+            .feature {
+                padding: 10px 18px;
+                font-size: 0.85em;
             }
 
             .tools-grid {
