@@ -32,45 +32,7 @@ Free collection of 16 essential developer tools. All tools run 100% client-side 
 - 📱 Mobile responsive
 - 🎨 Clean, modern design
 - 🆓 Completely free
-- 🚫 No ads, no tracking
-
-## 🚀 Deployment
-
-This is a static site that can be deployed to GitHub Pages:
-
-1. Push to GitHub
-2. Enable GitHub Pages in repository settings
-3. Select main branch as source
-4. Your site will be live at `https://devtoolshub.com`
-
-## 💰 Monetization Strategy
-
-- Google AdSense for ad revenue
-- SaaS affiliate programs (hosting, developer tools)
-- Optional premium API access
-- Goal: $100/day ($3,000/month) passive income
-
-## 📈 Growth Plan
-
-- **Month 1-2**: Launch site, 5-10K visits
-- **Month 3-4**: SEO optimization, 20-30K visits
-- **Month 5-6**: Scale to 80-100K visits, $100/day revenue target
-
-## 🎯 SEO Strategy
-
-- Long-tail keywords for each tool
-- Schema markup for rich snippets
-- Fast page load times
-- Mobile-optimized
-- Regular content updates
-
-## 📝 License
-
-MIT License - Free to use and modify
-
-## 🤝 Contributing
-
-Pull requests welcome! Feel free to add new tools or improve existing ones.
+  
 
 ## ⭐ Show Your Support
 
